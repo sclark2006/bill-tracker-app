@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ResetPasswordPage } from './reset-password.page';
 
@@ -7,7 +7,7 @@ describe('ResetPasswordPage', () => {
   let component: ResetPasswordPage;
   let fixture: ComponentFixture<ResetPasswordPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ResetPasswordPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
