@@ -25,4 +25,19 @@
       </ion-label>
      </ion-item>
    </ion-list>
+
+   <ion-list>
+    <ion-list-header> Paid Bills </ion-list-header>
+    <ion-item
+      *ngFor="let bill of billList | async"
+      routerLink="/bill-detail/{{bill.id}}"
+      [class.ion-hide]="!bill.paid"
+    >
+      <ion-icon name="checkmark" color="secondary" slot="end"></ion-icon>
+      <ion-label>
+        <h2>{{bill.name}}</h2>
+        <h3>Total: <strong>${{bill.amount}}</strong></h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
