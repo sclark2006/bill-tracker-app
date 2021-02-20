@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import {AngularFirestore,AngularFirestoreCollection, AngularFirestoreDocument} 
 from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import {AuthService} from './auth.service';
 import firebase from 'firebase/app';
 
@@ -14,6 +15,7 @@ export class BillService {
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private afStorage: AngularFireStorage,
     private authService: AuthService
     ) {}
 
@@ -45,4 +47,15 @@ export class BillService {
     const user: firebase.User = await this.authService.getUser();
     return this.firestore.doc(`/userProfile/${user.uid}/billList/${billId}`).update({ paid: true });
   }
+
+  async takeBillPhoto(billId: string, imageURL: string): Promise<any> {
+    const user: firebase.User = await this.authService.getUser();
+    const storageRef: AngularFireStorageReference = this.afStorage.ref(`${user.uid}/${billId}/billPicture/`);
+   
+    await storageRef.putString(imageURL,'base64',{contentType:'image/png'});
+   
+    const downLoadURL: string = await storageRef.getDownloadURL().toPromise();
+   
+    return this.firestore.doc(`/userProfile/${user.uid}/billList/${billId}`).update({picture: downLoadURL});
+   }
 }

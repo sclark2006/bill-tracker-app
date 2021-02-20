@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserCredential } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthFormComponent } from 'src/app/components/auth-form/auth-form.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 import firebase from 'firebase/app';
 
 @Component({
@@ -13,7 +13,10 @@ import firebase from 'firebase/app';
 export class SignupPage implements OnInit {
   @ViewChild(AuthFormComponent)
   signupForm: AuthFormComponent;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() { }
 
@@ -25,7 +28,7 @@ export class SignupPage implements OnInit {
       );
       this.authService.userId = userCredential.user.uid;
       await this.signupForm.hideLoading();
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl(`/bill-detail/${this.route.snapshot.paramMap.get('billId')}`);
     } catch (error) {
       await this.signupForm.hideLoading();
       this.signupForm.handleError(error);

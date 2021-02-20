@@ -4,6 +4,9 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 import { BillService } from '../../services/bill.service';
 import { Observable } from 'rxjs';
 
+import { AuthService } from '../../services/auth.service';
+import { Plugins, CameraResultType } from '@capacitor/core';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-bill-detail',
@@ -14,13 +17,15 @@ export class BillDetailPage implements OnInit {
 
   public bill: Observable<any>;
   public billId: string;
+  public placeholderPicture = 'assets/img/receipt.png';
 
   constructor(
     public router: Router,
     public route: ActivatedRoute,
     public actionCtrl: ActionSheetController,
     public alertCtrl: AlertController,
-    public billService: BillService
+    public billService: BillService,
+    private authService: AuthService
     ) { }
 
   async ngOnInit() {
@@ -62,5 +67,25 @@ export class BillDetailPage implements OnInit {
     });
     await action.present();
   }
+
+  async uploadPicture(): Promise<void> {
+    const user = await this.authService.getUser();
+    if (user.isAnonymous === true) {
+      // Redirects to Signup
+      const alert = await this.alertCtrl.create({message: "If you want to continue you will need to provide an email and create a password",
+                        buttons: [
+                            { text: 'Cancel' },
+                            { text: 'OK', handler: data => {
+                              this.router.navigate(['/signup', this.billId]);
+                            },
+                          },
+                        ]
+                      });
+      await alert.present();
+    } else {
+      // Take the picture
+    }
+  }
+
 
 }

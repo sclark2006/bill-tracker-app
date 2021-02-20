@@ -22,6 +22,11 @@ const routes: Routes = [
       import('./pages/signup/signup.module').then(m => m.SignupPageModule)
   },
   {
+    path: 'signup/:billId',
+    loadChildren: () => import ('./pages/signup/signup.module').then(m => m.SignupPageModule),
+    canActivate: [AuthGuard]
+   },
+  {
     path: 'reset-password',
     loadChildren: () =>
       import('./pages/reset-password/reset-password.module').then(
