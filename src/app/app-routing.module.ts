@@ -38,9 +38,14 @@ const routes: Routes = [
     loadChildren: () => 
       import('./pages/landing/landing.module').then(m => m.LandingPageModule)
   },
-  { path: 'bill-create', loadChildren: './pages/bill-create/bill-create.module#BillCreatePageModule' },
-  { path: 'bill-detail/:id', loadChildren: './pages/bill-detail/bill-detail.module#BillDetailPageModule',
-   canActivate: [AuthGuard] }
+  { path: 'bill-create', 
+    loadChildren: () => import('./pages/bill-create/bill-create.module').then(m => m.BillCreatePageModule),
+    canActivate: [AuthGuard]  
+  },
+  { path: 'bill-detail/:id', 
+    loadChildren: () => import('./pages/bill-detail/bill-detail.module').then(m => m.BillDetailPageModule),
+    canActivate: [AuthGuard] 
+  }
 
 ];
 
