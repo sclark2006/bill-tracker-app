@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import firebase from 'firebase/app';
-import { environment } from 'src/environments/environment';
+import { SwUpdate } from '@angular/service-worker';
+
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private swUpdate: SwUpdate) {
+    this.initializeApp();
+  }
+
+  initializeApp(): void {
+    this.swUpdate.available.subscribe(e => {
+      if(confirm("A new version is available. Load it?")) {
+        window.location.reload();
+      }
+    });
+  }
 }

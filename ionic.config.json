@@ -1,5 +1,5 @@
 {
-  "name": "AuthStarterAngularFire",
+  "name": "bill-tracker-app",
   "integrations": {
     "capacitor": {}
   },

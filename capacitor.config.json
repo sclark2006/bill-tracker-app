@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "AuthStarterAngularFire",
+  "appId": "bill.tracker.app",
+  "appName": "bill-tracker-app",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

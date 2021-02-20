@@ -2,7 +2,7 @@
   "name": "bill-tracker-app",
   "version": "0.0.1",
   "author": "Frederick Clark",
-  "homepage": "https://jsmobiledev.com/",
+  "homepage": "https://bill-tracker-8a88b.web.app",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~11.2.1",
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
+    "@angular/service-worker": "~11.2.1",
     "@capacitor/core": "2.4.6",
     "@ionic-native/core": "^5.19.1",
     "@ionic-native/splash-screen": "^5.19.1",
