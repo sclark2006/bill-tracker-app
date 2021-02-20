@@ -84,6 +84,12 @@ export class BillDetailPage implements OnInit {
       await alert.present();
     } else {
       // Take the picture
+      const debtPicture = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+      });
+      this.billService.takeBillPhoto(this.billId, debtPicture.base64String);
     }
   }
 
