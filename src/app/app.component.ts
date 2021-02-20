@@ -8,8 +8,5 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor() {
-    firebase.initializeApp(environment.firebase);
-    firebase.analytics();
-  }
+  constructor() {}
 }
