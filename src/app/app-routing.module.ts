@@ -34,7 +34,10 @@ const routes: Routes = [
       import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
     canActivate: [AuthGuard]
   },
-  { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
+  { path: 'landing', 
+    loadChildren: () => 
+      import('./pages/landing/landing.module').then(m => m.LandingPageModule)
+  },
   { path: 'bill-create', loadChildren: './pages/bill-create/bill-create.module#BillCreatePageModule' },
   { path: 'bill-detail/:id', loadChildren: './pages/bill-detail/bill-detail.module#BillDetailPageModule',
    canActivate: [AuthGuard] }
@@ -43,7 +46,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })

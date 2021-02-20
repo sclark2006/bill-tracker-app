@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { LandingPage } from './landing.page';
 
+import { AuthModule } from 'src/app/shared-modules/auth.module';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AuthModule
   ],
   declarations: [LandingPage]
 })
